@@ -13,9 +13,19 @@ object CalculatorParser extends RegexParsers {
     import scala.language.implicitConversions
     implicit def stringToDouble(s: String): Number = Number(s.toDouble)
 
+    val pi = "pi" ^^ {
+      case "pi" => Number(3.141592653)
+    }
+
+    val tau = "tau" ^^ {
+      case "tau" => Number(6.283185307)
+    }
+
     val number = "[0-9]+(?:.[0-9]+)?".r ^^ {
         case num => Number(num.toDouble)
     }
+
+    val concrete = ( pi | tau | number )
 
     val opMultiplyDivide = "[*/]".r ^^ { case op => Operator(op) }
     val opAddSubtract = "[+-]".r ^^ { case op => Operator(op) }
@@ -28,7 +38,7 @@ object CalculatorParser extends RegexParsers {
     }
 
     val parens: Parser[Component] = "(" ~> expression <~ ")"
-    val factor: Parser[Component] = number | parens
+    val factor: Parser[Component] = concrete | parens
     val term: Parser[Component] = factor ~ rep( opMultiplyDividepair ) ^^ {
         case factor ~ factors if(factors.isEmpty) => factor
         case factor ~ factors => Factors(factor +: ( factors.flatten ) )
