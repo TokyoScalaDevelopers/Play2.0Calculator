@@ -5,6 +5,8 @@ import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
 
+import com.github.TokyoScalaDevelopers.CalculatorParser.{CalculatorParser, CalculatorEvaluator,Number}
+
 case class CalculatorEquation(equation: String)
 
 object Calculator extends Controller {
@@ -16,6 +18,12 @@ object Calculator extends Controller {
 
   def index = Action {
     Ok(views.html.calculatorIndex("Please enter an equation to evaluate!", calculatorForm))
+  }
+
+  def calculateResult(equation: String): Option[String] = {
+    CalculatorParser.parseExpression(equation).flatMap(CalculatorEvaluator.evaluate).map({ case Number(num) =>
+      "%s: %s".format(equation, num.toString)
+    })
   }
 
   def calculate = Action { implicit request =>
