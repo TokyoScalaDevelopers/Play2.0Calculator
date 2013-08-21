@@ -27,11 +27,12 @@ object Calculator extends Controller {
   }
 
   def calculate = Action { implicit request =>
-    calculatorForm.bindFromRequest.fold(
+    val form = calculatorForm.bindFromRequest
+    form.fold(
       formWithErrors => BadRequest(views.html.calculatorIndex("Invalid equation", formWithErrors)),
       wrappedEquation => calculateResult(wrappedEquation.equation) match {
-        case Some(result) => Ok(views.html.calculatorIndex(result, calculatorForm))
-        case None => BadRequest(views.html.calculatorIndex("Unable to evaluate expression", calculatorForm))
+        case Some(result) => Ok(views.html.calculatorIndex(result, form))
+        case None => BadRequest(views.html.calculatorIndex("Unable to evaluate expression", form))
       }
     )
   }
