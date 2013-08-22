@@ -1,0 +1,39 @@
+body {
+    background-color: #1D3F58;
+    background-image: url(/assets/images/backgroundtile.png);
+}
+
+body .calculator {
+    background-color: #F8F8FF;
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2em;
+    border-radius: 2em;
+}
+
+body .calculator dt,
+body .calculator dd,
+body .calculator label,
+body .calculator input {
+    display: inline-block;
+    margin: 0;
+}
+
+body .calculator label {
+    text-transform: capitalize;
+}
+
+body .calculator label:after {
+    content: ": ";
+}
+
+body .calculator dd.info {
+    color: red;
+}
+
+body .calculator h2,
+body .calculator h4 {
+    margin: 0;
+    margin-bottom: 0.5em;
+}
