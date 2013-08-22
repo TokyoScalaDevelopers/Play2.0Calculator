@@ -1,12 +1,14 @@
 @(message: String = "", calculatorForm: Form[CalculatorEquation])
 
 @main("Play 2 calculator!") {
-    <h2>Welcome to the Play2 Calculator!</h2>
-    @if(message != "") {
-        <h4>@message</h4>
-    }
-    @helper.form(action = routes.Calculator.calculate) {
-        @helper.inputText(calculatorForm("equation"), 'placeholder -> "1 + 2 / (3 - 4) * 5")
-        <input type="submit" value="Calculate!" />
-    }
+    <div class="calculator">
+        <h2>Welcome to the Play2 Calculator!</h2>
+        @if(message != "") {
+            <h4>@message</h4>
+        }
+        @helper.form(action = routes.Calculator.calculate) {
+            @helper.inputText(calculatorForm("equation"), 'placeholder -> "1 + 2 / (3 - 4) * 5")
+            <input type="submit" value="Calculate!" />
+        }
+    </div>
 }
