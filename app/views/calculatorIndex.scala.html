@@ -7,7 +7,7 @@
             <h4>@message</h4>
         }
         @helper.form(action = routes.Calculator.calculate) {
-            @helper.inputText(calculatorForm("equation"), 'placeholder -> "1 + 2 / (3 - 4) * 5")
+            @helper.inputText(calculatorForm("equation"), 'placeholder -> "1 + 2 / (3 - 4) * 5",  'autocomplete -> "off")
             <input type="submit" value="Calculate!" />
         }
     </div>
