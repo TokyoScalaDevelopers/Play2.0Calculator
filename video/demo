@@ -1,0 +1,7 @@
+I=0
+
+go() { git checkout $(printf "step-%02d" $I) && git show; }
+next() { I=$((I+1)); go; }
+prev() { I=$((I-1)); go; }
+
+go
